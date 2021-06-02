@@ -12,13 +12,14 @@ class Guess:
         return player_guess2
 
     def check_guess(self, player_guess):
-        check = True
-        while not check:
-            if player_guess < 1000:
-                print(f'{player_guess} is not in range! Enter a number between 1000 & 9999')
-            elif player_guess > 9999:
-                print(f'{player_guess} is not in range! Enter a number between 1000 & 9999')
-            elif type(player_guess) == str:
-                    print(f'{player_guess} is not in range! Enter a number between 1000 & 9999')
-            else:
-                check = True
+        check = False
+        while check == False:
+            try:
+                player_guess = int(input('What is your guess? '))
+                if player_guess >= 1000 and player_guess <= 9999:
+                    check = True
+                    return player_guess
+                else:
+                    print(f'{player_guess} is not in range')
+            except ValueError as ex:
+                print(f'{ex} is not a number.')
