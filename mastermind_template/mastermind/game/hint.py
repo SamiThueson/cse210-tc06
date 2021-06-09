@@ -9,27 +9,23 @@ class Hint:
      guess(integer): The number that is going to be guesses by the user
      """
 
-    def __init__(self,number,guess):
+    def __init__(self):
         """The class constructor 
         """
-        self.number = number
-        self.guess = random.randint[1000,9999]
+        self.number_list = []
+       
+        self.symbols = []
 
+    def check_hint(self, guess):
+        index = 1
+        while index <= len(self.number_list):
+            if guess[index - 1 ] not in self.number:
+                self.hint[index - 1] = '*'
+            elif guess[index - 1] == self.number_list[index - 1]:
+                self.hint[index - 1] = 'x'
+            elif guess[index - 1] in self.number_list:
+                self.hint[index - 1] = 'o'
+            
+            index += 1
 
-    def display_hint(self):
-        guess_list = list(self.guess)
-        number_list = list(self.number)
-
-        idx = 0
-        for x in number_list:
-            if x in guess_list and x not in guess_list[idx]:
-                print("o",end="")
-            elif x ==guess_list[idx]:
-                print("x",end="")
-            else:
-                print("*",end="")
-
-            idx += 1
-
-
-
+        return self.symbols

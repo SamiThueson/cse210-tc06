@@ -4,12 +4,9 @@ class Number:
     Attributes:
     guess: The integer to be guesses
     """
-    def __init__(self,guess):
-        self.guess = random.randint[1000,9999]
-
+    def __init__(self):
+        self.guess = random.randint(1000,9999)
 
     def set_number(self):
         number = self.guess
-
         return number
-    
