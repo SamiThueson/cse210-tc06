@@ -1,4 +1,9 @@
 from game.guess import Guess
+from game.hint import Hint
+from game.number import Number
+from game.player import Player
+from game.turn import Turn
+import random
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -17,7 +22,18 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        pass
+        self.number = Number()
+        self.guess = Guess()
+        self.turn = Turn()
+        self.player = Player('')
+        self.name_list = []
+        self.guess_list = ['-', '-', '-', '-']
+        self.hint = Hint()
+        self.symbols = []
+        self.keep_playing = True
+        self.keep_names = []
+        self.player_guesses = []
+        self.get_playerGuess = ''
 
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -25,10 +41,11 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        self.player.get_name(self.name_list)
         while self.keep_playing:
             self.get_inputs()
-            self.do_updates()
             self.do_outputs()
+            self.do_updates(self.player_guesses)
 
     def get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
@@ -37,17 +54,18 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        pass
         
-    def do_updates(self):
+        self.guess.get_playerGuess(self.guess_list)
+
+    def do_updates(self, player_guesses):
         """Updates the important game information for each round of play. In 
         this case, that means updating the score.
 
         Args:
             self (Director): An instance of Director.
         """
-        pass
-        
+        self.hint.check_hint(self.guess_list)
+
     def do_outputs(self):
         """Outputs the important game information for each round of play. In 
         this case, that means the dice that were rolled and the score.
@@ -55,4 +73,6 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        pass
+        self.guess_list = self.player_guesses
+        print(f'Player {self.name_list[0]}: {self.guess_list}, {self.hint.symbols}')
+        print(f'Player {self.name_list[1]}: {self.guess_list}, {self.hint.symbols}')

@@ -14,9 +14,9 @@ class Player:
         Args:
             self (Player): an instance of Player.
         """
-        self.name = name
+        self.name_list = []
     
-    def get_name(self):
+    def get_name(self, name_list):
         """Returns the player's name.
 
         Args:
@@ -24,4 +24,6 @@ class Player:
         """
         for n in range(2):
             name = input(f"Enter a name for player {n + 1}: ")
-            return self.name
+            name_list.append(name)
+        
+        return self.name_list
